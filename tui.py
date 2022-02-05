@@ -171,8 +171,11 @@ def entity_details():
     :return: A list containing the name of an entity and a list of column indexes
     """
     # TODO: Your code here
-
     
+    entity = input("Please enter the name of an entity: \n")
+    column_indexes = input("Please enter a list of integers for the column indexes (Ex: 0,1,3,6): \n")
+
+    return [entity, [column_indexes]]
 
 def list_entity(entity, cols=[]):
     """
