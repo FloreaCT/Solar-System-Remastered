@@ -290,8 +290,3 @@ def save():
     :return: None if an invalid selection is made otherwise an integer corresponding to a valid option
     """
     # TODO: Your code here
-
-
-if __name__ == "__main__":
-    x = entity_details()
-    print(x)

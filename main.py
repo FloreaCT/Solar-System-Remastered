@@ -11,7 +11,7 @@ def run():
 
     # Task 19: Call the function welcome of the module tui.
     # This will display our welcome message when the program is executed.
-    # TODO: Your code here
+    tui.welcome()
 
     while True:
         # Task 20: Using the appropriate function in the module tui, display a menu of options
