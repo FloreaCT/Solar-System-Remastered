@@ -102,6 +102,12 @@ def source_data_path():
     """
     # TODO: Your code here
 
+    file_path = input("Please enter the file path: \n")
+    if file_path[-4:] != ".csv":
+        error(file_path)
+        return None
+    else:
+        return file_path
 
 def process_type():
     """
