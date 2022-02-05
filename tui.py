@@ -57,6 +57,7 @@ def started(operation):
     """
     # TODO: Your code here
 
+    print(operation, "has started.")
 
 def completed(operation):
     """
