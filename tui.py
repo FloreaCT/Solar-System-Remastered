@@ -10,6 +10,7 @@ def welcome():
     """
 
     message = "Solar Record Management System"
+
     print("*" * len(message))
     print(message)
     print("*" * len(message))
