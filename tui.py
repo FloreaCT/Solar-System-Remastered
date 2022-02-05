@@ -171,7 +171,7 @@ def entity_details():
     :return: A list containing the name of an entity and a list of column indexes
     """
     # TODO: Your code here
-    
+
     entity = input("Please enter the name of an entity: \n")
     column_indexes = input("Please enter a list of integers for the column indexes (Ex: 0,1,3,6): \n")
 
@@ -195,6 +195,7 @@ def list_entity(entity, cols=[]):
     :return: does not return anything
     """
     # TODO: Your code here
+
 
 
 def list_entities():
@@ -299,5 +300,5 @@ def save():
 
 
 if __name__ == "__main__":
-    welcome()
-    menu()
+    x = entity_details()
+    print(x)

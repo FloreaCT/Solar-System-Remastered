@@ -1,5 +1,7 @@
 # Task 17: Import the modules csv, tui and visual
 # TODO: Your code here
+import csv, tui, visual
+
 
 # Task 18: Create an empty list named 'records'.
 # This will be used to store the date read from the source data file.
