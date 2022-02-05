@@ -59,6 +59,7 @@ def started(operation):
 
     print(operation, "has started.")
 
+
 def completed(operation):
     """
     Task 4: Display a message to indicate that an operation has completed.
@@ -74,6 +75,7 @@ def completed(operation):
 
     print(operation, "has completed.")
 
+
 def error(error_msg):
     """
     Task 5: Display an error message.
@@ -88,6 +90,7 @@ def error(error_msg):
     # TODO: Your code here
 
     print('Error!', error_msg, "is not a valid option.")
+
 
 def source_data_path():
     """
@@ -108,6 +111,7 @@ def source_data_path():
         return None
     else:
         return file_path
+
 
 def process_type():
     """
@@ -141,6 +145,7 @@ def process_type():
         error(process_menu)
         return None
 
+
 def entity_name():
     """
     Task 8: Read in the name of an entity and return the name.
@@ -152,6 +157,7 @@ def entity_name():
     """
     # TODO: Your code here
 
+    return input("Please enter the entity name: \n")
 
 def entity_details():
     """
@@ -166,6 +172,7 @@ def entity_details():
     """
     # TODO: Your code here
 
+    
 
 def list_entity(entity, cols=[]):
     """
