@@ -1,5 +1,5 @@
 # Task 17: Import the modules csv, tui and visual
-import csv, tui, visual
+import csv, tui, visual, os
 
 
 # Task 18: Create an empty list named 'records'.
@@ -32,7 +32,23 @@ def run():
         # should appropriately handle the case where this is None.
         # - Read each line from the CSV file and add it to the list 'records'. You should appropriately handle the case
         # where the file cannot be found
-        
+        if menu == 1:
+            tui.started("Data loading")
+
+            def file_path():
+                path = tui.source_data_path()
+                if path:
+                    if os.path.exists(path):
+                        with open(path) as csvFile:
+                            csvdata = csv.reader(csvFile, delimiter=',')
+                            for row in csvdata:
+                                records.append(row)
+                            csvFile.close()
+                    else:
+                        print("Invalid file path or file is missing.")
+
+            file_path()
+            tui.completed("Data loading")
 
         # Task 22: Check if the user selected the option for processing data.  If so, then do the following:
         # - Use the appropriate function in the module tui to display a message to indicate that the data processing
@@ -97,7 +113,7 @@ def run():
         #       - Use the appropriate function in the module tui to list the categories.
         #       - Use the appropriate function in the module tui to indicate that the orbit summary process has
         #       completed.
-        # TODO: Your code here
+
 
         # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:
         # - Use the appropriate function in the module tui to indicate that the data visualisation operation

@@ -1,3 +1,6 @@
+import csv
+
+
 def welcome():
     """
     Task 1: Display a welcome message.
@@ -56,7 +59,7 @@ def started(operation):
     :return: Does not return anything
     """
 
-    print(operation, "has started.")
+    print(operation, "has started. \n")
 
 
 def completed(operation):
@@ -71,7 +74,7 @@ def completed(operation):
     :return: Does not return anything
     """
 
-    print(operation, "has completed.")
+    print(operation, "has completed. \n")
 
 
 def error(error_msg):
@@ -102,11 +105,11 @@ def source_data_path():
     """
 
     file_path = input("Please enter the file path: \n")
-    if file_path[-4:] != ".csv":
+    if file_path[-4:].lower() != ".csv":
         error(file_path)
         return None
     else:
-        return file_path
+        return file_path.lower()
 
 
 def process_type():
@@ -153,6 +156,7 @@ def entity_name():
 
     return input("Please enter the entity name: \n")
 
+
 def entity_details():
     """
     Task 9: Read in the name of an entity and column indexes. Return a list containing the name and indexes.
@@ -169,6 +173,7 @@ def entity_details():
     column_indexes = input("Please enter a list of integers for the column indexes (Ex: 0,1,3,6): \n")
 
     return [entity, [column_indexes]]
+
 
 def list_entity(entity, cols=[]):
     """
@@ -188,7 +193,6 @@ def list_entity(entity, cols=[]):
     :return: does not return anything
     """
     # TODO: Your code here
-
 
 
 def list_entities():
@@ -290,3 +294,6 @@ def save():
     :return: None if an invalid selection is made otherwise an integer corresponding to a valid option
     """
     # TODO: Your code here
+
+
+
