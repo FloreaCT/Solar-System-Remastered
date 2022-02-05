@@ -38,7 +38,7 @@ def menu():
                       "4. Save Data \n"
                       "5. Exit \n")
     if main_menu in menu_number:
-        return main_menu
+        return int(main_menu)
     else:
         error(main_menu)
         return None
@@ -127,6 +127,19 @@ def process_type():
     """
     # TODO: Your code here
 
+    process_numbers = "123456"
+    process_menu = input("1. Retrieve entity \n"
+                         "2. Retrieve entity details \n"
+                         "3. Categorise entities by type \n"
+                         "4. Categorise entities by gravity \n"
+                         "5. Summarise entities by orbit \n"
+                         "6. Back")
+    if process_menu in process_numbers:
+        return int(process_menu)
+
+    else:
+        error(process_menu)
+        return None
 
 def entity_name():
     """
