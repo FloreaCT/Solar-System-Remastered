@@ -1,5 +1,4 @@
 # Task 17: Import the modules csv, tui and visual
-# TODO: Your code here
 import csv, tui, visual
 
 

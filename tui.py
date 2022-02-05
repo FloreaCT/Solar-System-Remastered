@@ -55,7 +55,6 @@ def started(operation):
     :param operation: A string indicating the operation being started
     :return: Does not return anything
     """
-    # TODO: Your code here
 
     print(operation, "has started.")
 
@@ -71,7 +70,6 @@ def completed(operation):
     :param operation: A string indicating the operation being completed
     :return: Does not return anything
     """
-    # TODO: Your code here
 
     print(operation, "has completed.")
 
@@ -87,7 +85,6 @@ def error(error_msg):
     :param error_msg: A string containing an error message
     :return: Does not return anything
     """
-    # TODO: Your code here
 
     print('Error!', error_msg, "is not a valid option.")
 
@@ -103,7 +100,6 @@ def source_data_path():
 
     :return: None if the file path does not end in 'csv' otherwise return the file path entered by the user
     """
-    # TODO: Your code here
 
     file_path = input("Please enter the file path: \n")
     if file_path[-4:] != ".csv":
@@ -129,7 +125,6 @@ def process_type():
 
     :return: None if an invalid selection made otherwise an integer corresponding to a valid option
     """
-    # TODO: Your code here
 
     process_numbers = "123456"
     process_menu = input("1. Retrieve entity \n"
@@ -155,7 +150,6 @@ def entity_name():
 
     :return: the name of an entity
     """
-    # TODO: Your code here
 
     return input("Please enter the entity name: \n")
 
@@ -170,7 +164,6 @@ def entity_details():
 
     :return: A list containing the name of an entity and a list of column indexes
     """
-    # TODO: Your code here
 
     entity = input("Please enter the name of an entity: \n")
     column_indexes = input("Please enter a list of integers for the column indexes (Ex: 0,1,3,6): \n")
