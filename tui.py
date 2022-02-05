@@ -31,6 +31,17 @@ def menu():
 
     :return: None if invalid selection otherwise an integer corresponding to a valid selection
     """
+    menu_number = "12345"
+    main_menu = input("1. Load Data \n"
+                      "2. Process Data \n"
+                      "3. Visualise Data \n"
+                      "4. Save Data \n"
+                      "5. Exit \n")
+    if main_menu in menu_number:
+        return main_menu
+    else:
+        error(main_menu)
+        return None
 
 
 def started(operation):
@@ -254,6 +265,7 @@ def save():
     """
     # TODO: Your code here
 
+
 if __name__ == "__main__":
     welcome()
-
+    menu()
