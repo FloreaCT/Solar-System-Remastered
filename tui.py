@@ -87,6 +87,7 @@ def error(error_msg):
     """
     # TODO: Your code here
 
+    print('Error!', error_msg, "is not a valid option.")
 
 def source_data_path():
     """
