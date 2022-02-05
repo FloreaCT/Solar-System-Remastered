@@ -72,6 +72,7 @@ def completed(operation):
     """
     # TODO: Your code here
 
+    print(operation, "has completed.")
 
 def error(error_msg):
     """
