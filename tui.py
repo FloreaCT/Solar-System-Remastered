@@ -1,5 +1,5 @@
-import csv
-
+import main, os, csv
+tui_records = None
 
 def welcome():
     """
@@ -103,14 +103,14 @@ def source_data_path():
 
     :return: None if the file path does not end in 'csv' otherwise return the file path entered by the user
     """
-
-    file_path = input("Please enter the file path: \n")
-    if file_path[-4:].lower() != ".csv":
-        error(file_path)
-        return None
-    else:
-        return file_path.lower()
-
+    # TODO: Remove the # and the return statement
+    # file_path = input("Please enter the file path: \n")
+    # if file_path[-4:].lower() != ".csv":
+    #     error(file_path)
+    #     return None
+    # else:
+    #     return file_path.lower()
+    return "data/sol_data.csv"
 
 def process_type():
     """
@@ -135,7 +135,7 @@ def process_type():
                          "3. Categorise entities by type \n"
                          "4. Categorise entities by gravity \n"
                          "5. Summarise entities by orbit \n"
-                         "6. Back")
+                         "6. Back \n")
     if process_menu in process_numbers:
         return int(process_menu)
 
@@ -169,10 +169,14 @@ def entity_details():
     :return: A list containing the name of an entity and a list of column indexes
     """
 
-    entity = input("Please enter the name of an entity: \n")
+    entity = input("Please enter the name of an entity: \n").capitalize()
     column_indexes = input("Please enter a list of integers for the column indexes (Ex: 0,1,3,6): \n")
-
-    return [entity, [column_indexes]]
+    2
+    if len(column_indexes) == 0:
+        return [entity, []]
+    else:
+        indexes = [int(index) for index in column_indexes.split(",")]
+        return [entity, indexes]
 
 
 def list_entity(entity, cols=[]):
@@ -192,7 +196,19 @@ def list_entity(entity, cols=[]):
     :param cols: A list of integer values that represent column indexes
     :return: does not return anything
     """
-    # TODO: Your code here
+
+    entity_found = False
+    for entity in records:
+        if entity[0] == entity_name:
+            for number, item in enumerate(records[0]):
+                print('{0:>{1}}'.format(item, len(records[0])), end=" | ")
+                print('{0:<{1}}'.format(entity[number], len(records[0])))
+                entity_found = True
+            break
+        else:
+            continue
+    if not entity_found:
+        print(f"Could not find {entity_name} \n")
 
 
 def list_entities():
@@ -296,4 +312,35 @@ def save():
     # TODO: Your code here
 
 
+def file_path():
+    path = source_data_path()
+    if path:
+        if os.path.exists(path):
+            with open(path) as csvFile:
+                csvdata = csv.reader(csvFile, delimiter=',')
+                for row in csvdata:
+                    main.records.append(row)
+                    tui_records.append(row)
+                csvFile.close()
+        else:
+            print("Invalid file path or file is missing.")
 
+
+
+
+def entity_retrieval():
+
+    entity_found = False
+    if not entity_details[1]:
+        for entity in main.records:
+            if entity[0] == entity_name:
+                max_length = max(len(i) for i in main.records[0])
+                for number, item in enumerate(main.records[0]):
+                    print('{0:>{1}}'.format(item, max_length), end=" | ")
+                    print('{0:<{1}}'.format(entity[number], max_length))
+                    entity_found = True
+                break
+            else:
+                continue
+    if not entity_found:
+        print(f"Could not find {entity_name} \n")

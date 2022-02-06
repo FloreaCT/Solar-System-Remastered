@@ -1,5 +1,5 @@
 # Task 17: Import the modules csv, tui and visual
-import csv, tui, visual, os
+import csv, tui, visual
 
 
 # Task 18: Create an empty list named 'records'.
@@ -34,20 +34,7 @@ def run():
         # where the file cannot be found
         if menu == 1:
             tui.started("Data loading")
-
-            def file_path():
-                path = tui.source_data_path()
-                if path:
-                    if os.path.exists(path):
-                        with open(path) as csvFile:
-                            csvdata = csv.reader(csvFile, delimiter=',')
-                            for row in csvdata:
-                                records.append(row)
-                            csvFile.close()
-                    else:
-                        print("Invalid file path or file is missing.")
-
-            file_path()
+            tui.file_path()
             tui.completed("Data loading")
 
         # Task 22: Check if the user selected the option for processing data.  If so, then do the following:
@@ -113,7 +100,55 @@ def run():
         #       - Use the appropriate function in the module tui to list the categories.
         #       - Use the appropriate function in the module tui to indicate that the orbit summary process has
         #       completed.
+        elif menu == 2:
+            tui.started("Data processing operation")
+            process_menu = tui.process_type()
 
+            if process_menu == 1:
+                tui.started("Entity retrieval process")
+                entity_name = tui.entity_name().capitalize()
+                tui.completed("Entity retrieval process")
+
+            elif process_menu == 2:
+                tui.started("Entity details retrieval")
+                entity_details = tui.entity_details()
+
+            #     entity_found = False
+            #     if not entity_details[1]:
+            #         for entity in records:
+            #             if entity[0] == entity_details[0]:
+            #                 for number, item in enumerate(records[0]):
+            #                     print('{0:>{1}}'.format(item, len(records[0])), end=" | ")
+            #                     print('{0:<{1}}'.format(entity[number], len(records[0])))
+            #                     entity_found = True
+            #                 break
+            #             else:
+            #                 continue
+            #         if not entity_found:
+            #             print(f"Could not find {entity_name} \n")
+            #
+            #     else:
+            #         for entity in records:
+            #             if entity[0] == entity_details[0]:
+            #                 for index in entity_details[1]:
+            #                     print('{0:>{1}}'.format(records[0][index], len(records[0])), end=" | ")
+            #                     print('{0:<{1}}'.format(entity[index], len(records[0])))
+            #                     entity_found = True
+            #                 break
+            #             else:
+            #                 continue
+            #         if not entity_found:
+            #             print(f"Could not find {entity_details[0]} \n")
+            #
+            #     tui.completed("\nEntity details retrieval")
+            #
+            # elif process_menu == 3:
+                tui.started("Entity type categorisation process")
+
+
+
+                tui.completed("Entity type categorisation process")
+            tui.completed("Data processing operation")
 
         # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:
         # - Use the appropriate function in the module tui to indicate that the data visualisation operation
