@@ -247,7 +247,15 @@ def list_entities(entities=[], cols=[]):
     :param cols: A list of integer values that represent column indexes
     :return: Does not return anything
     """
-    # TODO: Your code here
+    if not cols:
+        for entity in entities:
+            list_entity(entity.capitalize(),[])
+            print("-" * len(tui_records[0]) * 2)
+    else:
+        for entity in entities:
+            print('{0:>{1}}'.format(entity.capitalize(), len(tui_records[0])+1+(len(entity)/1.5)))
+            list_entity(entity.capitalize(), cols)
+            print("-" * len(tui_records[0]) * 2)
 
 
 def list_categories():

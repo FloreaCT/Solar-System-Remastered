@@ -1,14 +1,12 @@
 # Task 17: Import the modules csv, tui and visual
 import csv, tui, visual
 
-
 # Task 18: Create an empty list named 'records'.
 # This will be used to store the date read from the source data file.
 records = []
 
 
 def run():
-
     # Task 19: Call the function welcome of the module tui.
     # This will display our welcome message when the program is executed.
     tui.welcome()
@@ -101,56 +99,30 @@ def run():
         #       - Use the appropriate function in the module tui to indicate that the orbit summary process has
         #       completed.
         elif menu == 2:
-            tui.started("Data processing operation")
-            process_menu = tui.process_type()
+            if not tui.tui_records:
+                print("Error! You must load the data first")
+                continue
+            else:
+                tui.started("Data processing operation")
+                process_menu = tui.process_type()
 
-            if process_menu == 1:
-                tui.started("Entity retrieval process")
-                tui.list_entity(tui.entity_name().capitalize())
-                tui.completed("Entity retrieval process")
+                if process_menu == 1:
+                    tui.started("Entity retrieval process")
+                    tui.list_entity(tui.entity_name().capitalize())
+                    tui.completed("Entity retrieval process")
 
-            elif process_menu == 2:
-                tui.started("Entity details retrieval")
+                elif process_menu == 2:
+                    tui.started("Entity details retrieval")
 
-                entity_indexes = tui.entity_details()
-                tui.list_entity(entity_indexes[0],entity_indexes[1])
+                    entity_indexes = tui.entity_details()
+                    tui.list_entity(entity_indexes[0], entity_indexes[1])
+                elif process_menu == 3:
+                    tui.started("Entity type categorisation process")
 
-            #     entity_found = False
-            #     if not entity_details[1]:
-            #         for entity in records:
-            #             if entity[0] == entity_details[0]:
-            #                 for number, item in enumerate(records[0]):
-            #                     print('{0:>{1}}'.format(item, len(records[0])), end=" | ")
-            #                     print('{0:<{1}}'.format(entity[number], len(records[0])))
-            #                     entity_found = True
-            #                 break
-            #             else:
-            #                 continue
-            #         if not entity_found:
-            #             print(f"Could not find {entity_name} \n")
-            #
-            #     else:
-            #         for entity in records:
-            #             if entity[0] == entity_details[0]:
-            #                 for index in entity_details[1]:
-            #                     print('{0:>{1}}'.format(records[0][index], len(records[0])), end=" | ")
-            #                     print('{0:<{1}}'.format(entity[index], len(records[0])))
-            #                     entity_found = True
-            #                 break
-            #             else:
-            #                 continue
-            #         if not entity_found:
-            #             print(f"Could not find {entity_details[0]} \n")
-            #
-            #     tui.completed("\nEntity details retrieval")
-            #
-            elif process_menu == 3:
-                tui.started("Entity type categorisation process")
-
-
-
-                tui.completed("Entity type categorisation process")
-            tui.completed("Data processing operation")
+                    tui.completed("Entity type categorisation process")
+                elif process_menu == 4:
+                    pass
+                tui.completed("Data processing operation")
 
         # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:
         # - Use the appropriate function in the module tui to indicate that the data visualisation operation
