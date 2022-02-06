@@ -106,12 +106,14 @@ def run():
 
             if process_menu == 1:
                 tui.started("Entity retrieval process")
-                entity_name = tui.entity_name().capitalize()
+                tui.list_entity(tui.entity_name().capitalize())
                 tui.completed("Entity retrieval process")
 
             elif process_menu == 2:
                 tui.started("Entity details retrieval")
-                entity_details = tui.entity_details()
+
+                entity_indexes = tui.entity_details()
+                tui.list_entity(entity_indexes[0],entity_indexes[1])
 
             #     entity_found = False
             #     if not entity_details[1]:
@@ -142,7 +144,7 @@ def run():
             #
             #     tui.completed("\nEntity details retrieval")
             #
-            # elif process_menu == 3:
+            elif process_menu == 3:
                 tui.started("Entity type categorisation process")
 
 
