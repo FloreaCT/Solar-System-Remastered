@@ -118,7 +118,7 @@ def run():
                     tui.list_entity(entity_indexes[0], entity_indexes[1])
                 elif process_menu == 3:
                     tui.started("Entity type categorisation process")
-
+                    tui.list_categories(tui.planet_categories())
                     tui.completed("Entity type categorisation process")
                 elif process_menu == 4:
                     pass

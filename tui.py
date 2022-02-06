@@ -2,6 +2,7 @@ import main, os, csv
 
 tui_records = []
 
+
 def welcome():
     """
     Task 1: Display a welcome message.
@@ -113,6 +114,7 @@ def source_data_path():
     #     return file_path.lower()
     return "data/sol_data.csv"
 
+
 def process_type():
     """
     Task 7: Display a menu of options for how the file should be processed. Read in the user's response.
@@ -213,18 +215,19 @@ def list_entity(entity, cols=[]):
                 print(f"Could not find {entity} \n")
         else:
             for planet in tui_records:
-                    if entity == planet[0]:
-                        for index in cols:
-                            print('{0:>{1}}'.format(tui_records[0][index], len(tui_records[0])), end=" | ")
-                            print('{0:<{1}}'.format(planet[index], len(tui_records[0])))
-                            entity_found = True
-                        break
-                    else:
-                        continue
+                if entity == planet[0]:
+                    for index in cols:
+                        print('{0:>{1}}'.format(tui_records[0][index], len(tui_records[0])), end=" | ")
+                        print('{0:<{1}}'.format(planet[index], len(tui_records[0])))
+                        entity_found = True
+                    break
+                else:
+                    continue
             if not entity_found:
                 print(f"Could not find {entity} \n")
     except IndexError:
-        print(f"Error!!! \nIndex is out of range. The maximum index you can input is {len(tui_records[0])-1}.\n")
+        print(f"Error!!! \nIndex is out of range. The maximum index you can input is {len(tui_records[0]) - 1}.\n")
+
 
 def list_entities(entities=[], cols=[]):
     """
@@ -249,16 +252,16 @@ def list_entities(entities=[], cols=[]):
     """
     if not cols:
         for entity in entities:
-            list_entity(entity.capitalize(),[])
+            list_entity(entity.capitalize(), [])
             print("-" * len(tui_records[0]) * 2)
     else:
         for entity in entities:
-            print('{0:>{1}}'.format(entity.capitalize(), len(tui_records[0])+1+(len(entity)/1.5)))
+            print('{0:>{1}}'.format(entity.capitalize(), len(tui_records[0]) + 1 + (len(entity) / 1.5)))
             list_entity(entity.capitalize(), cols)
             print("-" * len(tui_records[0]) * 2)
 
 
-def list_categories():
+def list_categories(categories):
     """
     Task 12: Display the contents of the dictionary categories.
 
@@ -270,8 +273,17 @@ def list_categories():
     :param categories: A dictionary containing category names and a list of entities that are part of that category
     :return: Does not return anything
     """
-    # TODO: Your code here
-
+    print("-" * len("Planets"))
+    print("Planets")
+    print("-" * len("Planets"))
+    for items in categories["Planets"]:
+        print(items)
+    print("-" * len("Non_planets"))
+    print("Non-planets")
+    print("-" * len("Non-Planets"))
+    for items in categories["Non_planets"]:
+        print(items)
+    print("-" * len("Non-Planets"))
 
 def gravity_range():
     """
@@ -349,21 +361,11 @@ def file_path():
             print("Invalid file path or file is missing.")
 
 
-
-
-def entity_retrieval():
-
-    entity_found = False
-    if not entity_details[1]:
-        for entity in main.records:
-            if entity[0] == entity_name:
-                max_length = max(len(i) for i in main.records[0])
-                for number, item in enumerate(main.records[0]):
-                    print('{0:>{1}}'.format(item, max_length), end=" | ")
-                    print('{0:<{1}}'.format(entity[number], max_length))
-                    entity_found = True
-                break
-            else:
-                continue
-    if not entity_found:
-        print(f"Could not find {entity_name} \n")
+def planet_categories():
+    planet_dictionary = {"Planets": [], "Non_planets": []}
+    for entity in tui_records[1:]:
+        if entity[1] == "FALSE":
+            planet_dictionary["Non_planets"].append(entity[0])
+        else:
+            planet_dictionary["Planets"].append(entity[0])
+    return planet_dictionary
