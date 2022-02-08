@@ -1,9 +1,34 @@
 # Task 17: Import the modules csv, tui and visual
-import csv, tui, visual
+import csv, tui, visual, os
 
 # Task 18: Create an empty list named 'records'.
 # This will be used to store the date read from the source data file.
 records = []
+
+
+def retrieve_entity(data, entity):
+    entity_found = False
+    for planet in data:
+        if entity == planet[0]:
+            return planet
+        else:
+            continue
+    if not entity_found:
+        print(f"Could not find {entity} \n")
+    return
+
+
+def file_path():
+    path = tui.source_data_path()
+    if path:
+        if os.path.exists(path):
+            with open(path) as csvFile:
+                csvdata = csv.reader(csvFile, delimiter=',')
+                for row in csvdata:
+                    records.append(row)
+                csvFile.close()
+        else:
+            print("Invalid file path or file is missing.")
 
 
 def run():
@@ -32,7 +57,7 @@ def run():
         # where the file cannot be found
         if menu == 1:
             tui.started("Data loading")
-            tui.file_path()
+            file_path()
             tui.completed("Data loading")
 
         # Task 22: Check if the user selected the option for processing data.  If so, then do the following:
@@ -99,7 +124,7 @@ def run():
         #       - Use the appropriate function in the module tui to indicate that the orbit summary process has
         #       completed.
         elif menu == 2:
-            if not tui.tui_records:
+            if not records:
                 print("Error! You must load the data first")
                 continue
             else:
@@ -108,12 +133,11 @@ def run():
 
                 if process_menu == 1:
                     tui.started("Entity retrieval process")
-                    tui.list_entity(tui.entity_name().capitalize())
+                    retrieve_entity(records, tui.entity_name().capitalize())
                     tui.completed("Entity retrieval process")
 
                 elif process_menu == 2:
                     tui.started("Entity details retrieval")
-
                     entity_indexes = tui.entity_details()
                     tui.list_entity(entity_indexes[0], entity_indexes[1])
                 elif process_menu == 3:
@@ -124,6 +148,10 @@ def run():
                     tui.started("Categorisation by entity gravity process")
                     tui.list_categories(tui.planet_and_gravity_categories("gravity"))
                     tui.completed("Categorisation by entity gravity process")
+                elif process_menu == 5:
+                    tui.started("Orbit summary process")
+                    tui.orbits()
+                    tui.completed("Orbit summary process")
                 tui.completed("Data processing operation")
 
         # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:

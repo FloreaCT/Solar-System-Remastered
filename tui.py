@@ -1,7 +1,4 @@
-import main, os, csv
-
-tui_records = []
-
+import main
 
 def welcome():
     """
@@ -312,8 +309,9 @@ def orbits():
 
     :return: a list of entity names
     """
-    # TODO: Your code here
+    orbits = input("Please enter the name of the planets: ").capitalize().split(",")
 
+    return [planet.capitalize() for planet in orbits]
 
 def visualise():
     """
@@ -348,20 +346,6 @@ def save():
     :return: None if an invalid selection is made otherwise an integer corresponding to a valid option
     """
     # TODO: Your code here
-
-
-def file_path():
-    path = source_data_path()
-    if path:
-        if os.path.exists(path):
-            with open(path) as csvFile:
-                csvdata = csv.reader(csvFile, delimiter=',')
-                for row in csvdata:
-                    main.records.append(row)
-                    tui_records.append(row)
-                csvFile.close()
-        else:
-            print("Invalid file path or file is missing.")
 
 
 def planet_and_gravity_categories(option):
