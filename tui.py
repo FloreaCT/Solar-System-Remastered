@@ -273,6 +273,7 @@ def list_categories(categories):
     :param categories: A dictionary containing category names and a list of entities that are part of that category
     :return: Does not return anything
     """
+
     print("-" * len("Planets"))
     print("Planets")
     print("-" * len("Planets"))
@@ -368,4 +369,6 @@ def planet_categories():
             planet_dictionary["Non_planets"].append(entity[0])
         else:
             planet_dictionary["Planets"].append(entity[0])
+    planet_dictionary["Planets"] = sorted(planet_dictionary["Planets"], key=lambda x: x[0])
+    planet_dictionary["Non_planets"] = sorted(planet_dictionary["Non_planets"], key=lambda x: x[0])
     return planet_dictionary
