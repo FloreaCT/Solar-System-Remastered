@@ -30,6 +30,33 @@ def file_path():
         else:
             print("Invalid file path or file is missing.")
 
+def planet_and_gravity_categories(option):
+    if option == "planets":
+        planet_dictionary = {"Planets": [], "Non_planets": []}
+        for entity in records[1:]:
+            if entity[1] == "FALSE":
+                planet_dictionary["Non_planets"].append(entity[0])
+            else:
+                planet_dictionary["Planets"].append(entity[0])
+        planet_dictionary["Planets"] = sorted(planet_dictionary["Planets"], key=lambda x: x[0])
+        planet_dictionary["Non_planets"] = sorted(planet_dictionary["Non_planets"], key=lambda x: x[0])
+        return planet_dictionary
+
+    elif option == "gravity":
+        gravities = tui.gravity_range()
+        planet_gravities = {"Lower Limits": [],
+                            "Medium Limits": [],
+                            "Upper Limits": []}
+
+        for gravity in records[1:]:
+            if float(gravity[8]) < gravities[0]:
+                planet_gravities["Lower Limits"].append(gravity[0])
+            elif gravities[0] < float(gravity[8]) < gravities[1]:
+                planet_gravities["Medium Limits"].append(gravity[0])
+            else:
+                planet_gravities["Upper Limits"].append(gravity[0])
+
+        return planet_gravities
 
 def run():
     # Task 19: Call the function welcome of the module tui.
@@ -140,18 +167,23 @@ def run():
                     tui.started("Entity details retrieval")
                     entity = tui.entity_details()
                     tui.list_entity(retrieve_entity(records, entity[0]), entity[1])
+                    tui.completed("Entity details retrieval")
+
                 elif process_menu == 3:
                     tui.started("Entity type categorisation process")
-                    tui.list_categories(tui.planet_and_gravity_categories("planets"))
+                    tui.list_categories(planet_and_gravity_categories("planets"))
                     tui.completed("Entity type categorisation process")
+
                 elif process_menu == 4:
                     tui.started("Categorisation by entity gravity process")
-                    tui.list_categories(tui.planet_and_gravity_categories("gravity"))
+                    tui.list_categories(planet_and_gravity_categories("gravity"))
                     tui.completed("Categorisation by entity gravity process")
+
                 elif process_menu == 5:
                     tui.started("Orbit summary process")
                     tui.orbits()
                     tui.completed("Orbit summary process")
+
                 tui.completed("Data processing operation")
 
         # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:

@@ -327,33 +327,3 @@ def save():
     :return: None if an invalid selection is made otherwise an integer corresponding to a valid option
     """
     # TODO: Your code here
-
-
-def planet_and_gravity_categories(option):
-    if option == "planets":
-        planet_dictionary = {"Planets": [], "Non_planets": []}
-        for entity in tui_records[1:]:
-            if entity[1] == "FALSE":
-                planet_dictionary["Non_planets"].append(entity[0])
-            else:
-                planet_dictionary["Planets"].append(entity[0])
-        planet_dictionary["Planets"] = sorted(planet_dictionary["Planets"], key=lambda x: x[0])
-        planet_dictionary["Non_planets"] = sorted(planet_dictionary["Non_planets"], key=lambda x: x[0])
-        return planet_dictionary
-
-    elif option == "gravity":
-        gravities = gravity_range()
-        planet_gravities = {"Lower Limits": [],
-                            "Medium Limits": [],
-                            "Upper Limits": []}
-
-        for gravity in tui_records[1:]:
-            if float(gravity[8]) < gravities[0]:
-                planet_gravities["Lower Limits"].append(gravity[0])
-            elif gravities[0] < float(gravity[8]) < gravities[1]:
-                planet_gravities["Medium Limits"].append(gravity[0])
-            else:
-                planet_gravities["Upper Limits"].append(gravity[0])
-
-        return planet_gravities
-
