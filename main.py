@@ -133,13 +133,13 @@ def run():
 
                 if process_menu == 1:
                     tui.started("Entity retrieval process")
-                    retrieve_entity(records, tui.entity_name().capitalize())
+                    tui.list_entity(retrieve_entity(records, tui.entity_name()))
                     tui.completed("Entity retrieval process")
 
                 elif process_menu == 2:
                     tui.started("Entity details retrieval")
-                    entity_indexes = tui.entity_details()
-                    tui.list_entity(entity_indexes[0], entity_indexes[1])
+                    entity = tui.entity_details()
+                    tui.list_entity(retrieve_entity(records, entity[0]), entity[1])
                 elif process_menu == 3:
                     tui.started("Entity type categorisation process")
                     tui.list_categories(tui.planet_and_gravity_categories("planets"))

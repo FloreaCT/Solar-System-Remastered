@@ -154,7 +154,7 @@ def entity_name():
     :return: the name of an entity
     """
 
-    return input("Please enter the entity name: \n")
+    return input("Please enter the entity name: \n").capitalize()
 
 
 def entity_details():
@@ -169,9 +169,9 @@ def entity_details():
     :return: A list containing the name of an entity and a list of column indexes
     """
 
-    entity = input("Please enter the name of an entity: \n").capitalize()
+    entity = entity_name()
     column_indexes = input("Please enter a list of integers for the column indexes (Ex: 0,1,3,6): \n")
-    2
+
     if len(column_indexes) == 0:
         return [entity, []]
     else:
@@ -197,33 +197,14 @@ def list_entity(entity, cols=[]):
     :return: does not return anything
     """
     try:
-        entity_found = False
         if not cols:
-            for planet in tui_records:
-                if entity == planet[0]:
-                    for number, item in enumerate(tui_records[0]):
-                        print('{0:>{1}}'.format(item, len(tui_records[0])), end=" | ")
-                        print('{0:<{1}}'.format(planet[number], len(tui_records[0])))
-                        entity_found = True
-                    break
-                else:
-                    continue
-            if not entity_found:
-                print(f"Could not find {entity} \n")
+            for detail in entity:
+                print(detail)
         else:
-            for planet in tui_records:
-                if entity == planet[0]:
-                    for index in cols:
-                        print('{0:>{1}}'.format(tui_records[0][index], len(tui_records[0])), end=" | ")
-                        print('{0:<{1}}'.format(planet[index], len(tui_records[0])))
-                        entity_found = True
-                    break
-                else:
-                    continue
-            if not entity_found:
-                print(f"Could not find {entity} \n")
+            for number in cols:
+                print(entity[number])
     except IndexError:
-        print(f"Error!!! \nIndex is out of range. The maximum index you can input is {len(tui_records[0]) - 1}.\n")
+        print(f"Error!!! \nIndex is out of range. The maximum index you can input is 30.\n")
 
 
 def list_entities(entities=[], cols=[]):
