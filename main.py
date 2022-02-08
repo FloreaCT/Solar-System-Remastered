@@ -15,7 +15,7 @@ def retrieve_entity(data, entity):
             continue
     if not entity_found:
         print(f"Could not find {entity} \n")
-    return
+        run()
 
 
 def file_path():
@@ -291,7 +291,6 @@ def run():
         # Task 30: If the user selected an invalid option then use the appropriate function of the module tui to
         # display an error message
         # TODO: Your code here
-
 
 if __name__ == "__main__":
     run()

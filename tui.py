@@ -175,7 +175,7 @@ def entity_details():
     if len(column_indexes) == 0:
         return [entity, []]
     else:
-        indexes = [int(index) for index in column_indexes.split(",")]
+        indexes = [int(index) for index in column_indexes.split(",") if index.isnumeric()]
         return [entity, indexes]
 
 
@@ -231,12 +231,12 @@ def list_entities(entities=[], cols=[]):
     if not cols:
         for entity in entities:
             list_entity(entity.capitalize(), [])
-            print("-" * len(tui_records[0]) * 2)
+            print("-" * len(entity[0]) * 2)
     else:
         for entity in entities:
-            print('{0:>{1}}'.format(entity.capitalize(), len(tui_records[0]) + 1 + (len(entity) / 1.5)))
+            print('{0:>{1}}'.format(entity.capitalize(), len(entity[0]) + 1 + (len(entity) / 1.5)))
             list_entity(entity.capitalize(), cols)
-            print("-" * len(tui_records[0]) * 2)
+            print("-" * len(entity[0]) * 2)
 
 
 def list_categories(categories):
