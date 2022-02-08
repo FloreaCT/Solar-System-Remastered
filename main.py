@@ -30,6 +30,7 @@ def file_path():
         else:
             print("Invalid file path or file is missing.")
 
+
 def planet_and_gravity_categories(option):
     if option == "planets":
         planet_dictionary = {"Planets": [], "Non_planets": []}
@@ -57,6 +58,42 @@ def planet_and_gravity_categories(option):
                 planet_gravities["Upper Limits"].append(gravity[0])
 
         return planet_gravities
+
+    else:
+
+        orbits = {}
+
+        for entity in set(option):
+            if not entity in [y for x in records for y in x]:
+                option.remove(entity)
+                print(f"\nCould not find {entity}.\n")
+
+        for planet in option:
+            for entity in records[1:]:
+                if planet != entity[21]:
+                    continue
+                else:
+                    small = []
+                    large = []
+                    for orbiting in records[1:]:
+                        if planet == orbiting[21]:
+                            if orbiting[21] != "NA":
+                                if float(orbiting[10]) < 100:
+                                    small.append(orbiting[0])
+                                else:
+                                    large.append(orbiting[0])
+
+                            else:
+                                continue
+                    if not small:
+                        orbits[planet] = {"large": large}
+                    elif not large:
+                        orbits[planet] = {"small": small}
+                    else:
+                        orbits[planet] = {"small": small, "large": large}
+
+    return orbits
+
 
 def run():
     # Task 19: Call the function welcome of the module tui.
@@ -181,7 +218,7 @@ def run():
 
                 elif process_menu == 5:
                     tui.started("Orbit summary process")
-                    tui.orbits()
+                    tui.list_categories(planet_and_gravity_categories(tui.orbits()))
                     tui.completed("Orbit summary process")
 
                 tui.completed("Data processing operation")

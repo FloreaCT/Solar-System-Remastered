@@ -290,9 +290,9 @@ def orbits():
 
     :return: a list of entity names
     """
-    orbits = input("Please enter the name of the planets: ").capitalize().split(",")
+    plenets_on_orbit = input("Please enter the name of the planets: ").capitalize().split(",")
 
-    return [planet.capitalize() for planet in orbits]
+    return [planet.capitalize() for planet in plenets_on_orbit]
 
 def visualise():
     """
