@@ -286,11 +286,12 @@ def run():
 
         # Task 29: Check if the user selected the option for exiting.  If so, then do the following:
         # break out of the loop
-        # TODO: Your code here
+        elif menu == 5:
+            exit("Thank you for using our software")
 
         # Task 30: If the user selected an invalid option then use the appropriate function of the module tui to
         # display an error message
-        # TODO: Your code here
+
 
 if __name__ == "__main__":
     run()
