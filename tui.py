@@ -310,11 +310,16 @@ def visualise():
 
     :return: None if an invalid selection is made otherwise an integer corresponding to a valid option
     """
-    x = int(input("1. Entities by type \n"
-                  "2. Entities by gravity \n"
-                  "3. Summary of orbits \n"
-                  "4. Animate gravities"))
-    return x
+    option = input("1. Entities by type \n"
+                   "2. Entities by gravity \n"
+                   "3. Summary of orbits \n"
+                   "4. Animate gravities")
+    if option.isnumeric():
+        return int(option)
+    else:
+        error(option)
+        return None
+
 
 def save():
     """
