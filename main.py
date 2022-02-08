@@ -118,10 +118,12 @@ def run():
                     tui.list_entity(entity_indexes[0], entity_indexes[1])
                 elif process_menu == 3:
                     tui.started("Entity type categorisation process")
-                    tui.list_categories(tui.planet_categories())
+                    tui.list_categories(tui.planet_and_gravity_categories("planets"))
                     tui.completed("Entity type categorisation process")
                 elif process_menu == 4:
-                    pass
+                    tui.started("Categorisation by entity gravity process")
+                    tui.list_categories(tui.planet_and_gravity_categories("gravity"))
+                    tui.completed("Categorisation by entity gravity process")
                 tui.completed("Data processing operation")
 
         # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:

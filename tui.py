@@ -274,17 +274,16 @@ def list_categories(categories):
     :return: Does not return anything
     """
 
-    print("-" * len("Planets"))
-    print("Planets")
-    print("-" * len("Planets"))
-    for items in categories["Planets"]:
-        print(items)
-    print("-" * len("Non_planets"))
-    print("Non-planets")
-    print("-" * len("Non-Planets"))
-    for items in categories["Non_planets"]:
-        print(items)
-    print("-" * len("Non-Planets"))
+    for key, values in categories.items():
+        print("-" * len(key))
+        print(key)
+        print("-" * len(key))
+        if not values:
+            print(f"No {key} to show")
+        else:
+            print(values)
+
+
 
 def gravity_range():
     """
@@ -296,7 +295,10 @@ def gravity_range():
 
     :return: a tuple with the lower and upper limits
     """
-    # TODO: Your code here
+    lower_limit = input("Please enter the lower limit:\n")
+    upper_limit = input("Please enter the upper limit:\n")
+
+    return float(lower_limit), float(upper_limit)
 
 
 def orbits():
@@ -362,13 +364,31 @@ def file_path():
             print("Invalid file path or file is missing.")
 
 
-def planet_categories():
-    planet_dictionary = {"Planets": [], "Non_planets": []}
-    for entity in tui_records[1:]:
-        if entity[1] == "FALSE":
-            planet_dictionary["Non_planets"].append(entity[0])
-        else:
-            planet_dictionary["Planets"].append(entity[0])
-    planet_dictionary["Planets"] = sorted(planet_dictionary["Planets"], key=lambda x: x[0])
-    planet_dictionary["Non_planets"] = sorted(planet_dictionary["Non_planets"], key=lambda x: x[0])
-    return planet_dictionary
+def planet_and_gravity_categories(option):
+    if option == "planets":
+        planet_dictionary = {"Planets": [], "Non_planets": []}
+        for entity in tui_records[1:]:
+            if entity[1] == "FALSE":
+                planet_dictionary["Non_planets"].append(entity[0])
+            else:
+                planet_dictionary["Planets"].append(entity[0])
+        planet_dictionary["Planets"] = sorted(planet_dictionary["Planets"], key=lambda x: x[0])
+        planet_dictionary["Non_planets"] = sorted(planet_dictionary["Non_planets"], key=lambda x: x[0])
+        return planet_dictionary
+
+    elif option == "gravity":
+        gravities = gravity_range()
+        planet_gravities = {"Lower Limits": [],
+                            "Medium Limits": [],
+                            "Upper Limits": []}
+
+        for gravity in tui_records[1:]:
+            if float(gravity[8]) < gravities[0]:
+                planet_gravities["Lower Limits"].append(gravity[0])
+            elif gravities[0] < float(gravity[8]) < gravities[1]:
+                planet_gravities["Medium Limits"].append(gravity[0])
+            else:
+                planet_gravities["Upper Limits"].append(gravity[0])
+
+        return planet_gravities
+
