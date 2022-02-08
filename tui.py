@@ -1,5 +1,6 @@
 import main
 
+
 def welcome():
     """
     Task 1: Display a welcome message.
@@ -262,7 +263,6 @@ def list_categories(categories):
             print(values)
 
 
-
 def gravity_range():
     """
     Task 13: Ask the user for the lower and upper limits for gravity and return a tuple containing the limits.
@@ -294,6 +294,7 @@ def orbits():
 
     return [planet.capitalize() for planet in plenets_on_orbit]
 
+
 def visualise():
     """
     Task 15: Display a menu of options for how the data should be visualised. Return the user's response.
@@ -309,8 +310,11 @@ def visualise():
 
     :return: None if an invalid selection is made otherwise an integer corresponding to a valid option
     """
-    # TODO: Your code here
-
+    x = int(input("1. Entities by type \n"
+                  "2. Entities by gravity \n"
+                  "3. Summary of orbits \n"
+                  "4. Animate gravities"))
+    return x
 
 def save():
     """
