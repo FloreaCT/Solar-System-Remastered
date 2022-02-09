@@ -22,6 +22,7 @@ def entities_pie(categories):
 
     plt.show()
 
+
 def entities_bar(categories):
     """
     Task 25: Display a single subplot that shows a bar chart for categories.
@@ -31,6 +32,19 @@ def entities_bar(categories):
     :param categories: A dictionary with entities categorised into 'low', 'medium' and 'high' gravity
     :return: Does not return anything
     """
+
+    labels = [label for label in categories.keys()]
+    sizes = [len(size) for size in categories.values()]
+
+    plt.barh(labels, sizes)
+    plt.xlabel("Number of planets")
+    plt.title("Planets categorised by gravity")
+
+    for index, value in enumerate(sizes):
+        plt.text(value, index, str(value))
+
+    plt.gcf().set_size_inches(10, 10)
+    plt.show()
 
 
 def orbits(summary):
@@ -63,4 +77,3 @@ def gravity_animation(categories):
     :param categories: A dictionary containing "low", "medium" and "high" gravity entities
     :return: Does not return anything
     """
-

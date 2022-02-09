@@ -231,6 +231,10 @@ def run():
                     visual.entities_pie(planet_and_gravity_categories("planets"))
                     tui.completed("Entity type visualisation process")
 
+                if visualise_menu == 2:
+                    tui.started("Entity by gravity process")
+                    visual.entities_bar(planet_and_gravity_categories("gravity"))
+                    tui.completed("Entity by gravity process")
                 tui.completed("Data visualisation operation")
 
             # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:
