@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 
 def entities_pie(categories):
@@ -11,6 +12,15 @@ def entities_pie(categories):
     :return: Does not return anything
     """
 
+    labels = [label for label in categories.keys()]
+    sizes = [len(size) for size in categories.values()]
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, labels=labels, autopct='%1.1f%%')
+    ax1.axis('equal')
+    plt.title("Number of planets and non planets")
+
+    plt.show()
 
 def entities_bar(categories):
     """

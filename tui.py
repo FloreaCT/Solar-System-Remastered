@@ -313,7 +313,7 @@ def visualise():
     option = input("1. Entities by type \n"
                    "2. Entities by gravity \n"
                    "3. Summary of orbits \n"
-                   "4. Animate gravities")
+                   "4. Animate gravities\n")
     if option.isnumeric():
         return int(option)
     else:

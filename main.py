@@ -96,7 +96,7 @@ def planet_and_gravity_categories(option):
 
 
 def run():
-    try:
+    # try:
         # Task 19: Call the function welcome of the module tui.
         # This will display our welcome message when the program is executed.
         tui.welcome()
@@ -209,7 +209,7 @@ def run():
 
                     elif process_menu == 3:
                         tui.started("Entity type categorisation process")
-                        tui.list_categories(planet_and_gravity_categories("planets"))
+                        planets = tui.list_categories(planet_and_gravity_categories("planets"))
                         tui.completed("Entity type categorisation process")
 
                     elif process_menu == 4:
@@ -224,7 +224,15 @@ def run():
 
                     tui.completed("Data processing operation")
             elif menu == 3:
-                tui.visualise()
+                tui.started("Data visualisation operation")
+                visualise_menu = tui.visualise()
+                if visualise_menu == 1:
+                    tui.started("Entity type visualisation process")
+                    visual.entities_pie(planet_and_gravity_categories("planets"))
+                    tui.completed("Entity type visualisation process")
+
+                tui.completed("Data visualisation operation")
+
             # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:
             # - Use the appropriate function in the module tui to indicate that the data visualisation operation
             # has started.
@@ -293,10 +301,10 @@ def run():
 
             # Task 30: If the user selected an invalid option then use the appropriate function of the module tui to
             # display an error message
-    except ValueError:
-        error = str(sys.exc_info()[1]).split()
-        tui.error(error[-1])
-        run()
+    # except ValueError:
+    #     error = str(sys.exc_info()[1]).split()
+    #     tui.error(error[-1])
+    #     run()
 
 if __name__ == "__main__":
     run()
