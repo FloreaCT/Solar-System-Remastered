@@ -209,7 +209,7 @@ def run():
 
                     elif process_menu == 3:
                         tui.started("Entity type categorisation process")
-                        planets = tui.list_categories(planet_and_gravity_categories("planets"))
+                        tui.list_categories(planet_and_gravity_categories("planets"))
                         tui.completed("Entity type categorisation process")
 
                     elif process_menu == 4:
@@ -223,20 +223,6 @@ def run():
                         tui.completed("Orbit summary process")
 
                     tui.completed("Data processing operation")
-            elif menu == 3:
-                tui.started("Data visualisation operation")
-                visualise_menu = tui.visualise()
-                if visualise_menu == 1:
-                    tui.started("Entity type visualisation process")
-                    visual.entities_pie(planet_and_gravity_categories("planets"))
-                    tui.completed("Entity type visualisation process")
-
-                if visualise_menu == 2:
-                    tui.started("Entity by gravity process")
-                    visual.entities_bar(planet_and_gravity_categories("gravity"))
-                    tui.completed("Entity by gravity process")
-                tui.completed("Data visualisation operation")
-
             # Task 23: Check if the user selected the option for visualising data.  If so, then do the following:
             # - Use the appropriate function in the module tui to indicate that the data visualisation operation
             # has started.
@@ -284,6 +270,30 @@ def run():
             #       - Use the appropriate function in the module visual to animate the gravity.
             #       - Use the appropriate function in the module tui to indicate that the gravity animation visualisation
             #       process has completed.
+
+            elif menu == 3:
+                tui.started("Data visualisation operation")
+                visualise_menu = tui.visualise()
+                if visualise_menu == 1:
+                    tui.started("Entity type visualisation process")
+                    visual.entities_pie(planet_and_gravity_categories("planets"))
+                    tui.completed("Entity type visualisation process")
+
+                if visualise_menu == 2:
+                    tui.started("Entity by gravity process")
+                    visual.entities_bar(planet_and_gravity_categories("gravity"))
+                    tui.completed("Entity by gravity process")
+
+                if visualise_menu == 3:
+                    tui.started("Orbit summary visualisation process")
+                    visual.orbits(planet_and_gravity_categories(planet_and_gravity_categories("planets")["Planets"]))
+                    tui.completed("Orbit summary visualisation process")
+
+                if visualise_menu == 5:
+                    menu
+                tui.completed("Data visualisation operation")
+
+
             # TODO: Your code here
 
             # Task 28: Check if the user selected the option for saving data.  If so, then do the following:
@@ -309,6 +319,7 @@ def run():
     #     error = str(sys.exc_info()[1]).split()
     #     tui.error(error[-1])
     #     run()
+
 
 if __name__ == "__main__":
     run()

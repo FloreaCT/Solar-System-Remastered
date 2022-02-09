@@ -155,7 +155,7 @@ def entity_name():
     :return: the name of an entity
     """
 
-    return input("Please enter the entity name: \n").capitalize()
+    return input("Please enter the entity name: \n").title()
 
 
 def entity_details():
@@ -205,7 +205,7 @@ def list_entity(entity, cols=[]):
             for number in cols:
                 print(entity[number])
     except IndexError:
-        print(f"Error!!! \nIndex is out of range. The maximum index you can input is 30.\n")
+        print(f"Error!!! \nIndex is out of range. The maximum index you can input is {len(entity-1)}.\n")
 
 
 def list_entities(entities=[], cols=[]):
@@ -313,7 +313,8 @@ def visualise():
     option = input("1. Entities by type \n"
                    "2. Entities by gravity \n"
                    "3. Summary of orbits \n"
-                   "4. Animate gravities\n")
+                   "4. Animate gravities \n"
+                   "5. Back \n")
     if option.isnumeric():
         return int(option)
     else:

@@ -37,8 +37,8 @@ def entities_bar(categories):
     sizes = [len(size) for size in categories.values()]
 
     plt.barh(labels, sizes)
-    plt.xlabel("Number of planets")
-    plt.title("Planets categorised by gravity")
+    plt.xlabel("Number of entities")
+    plt.title("Entities categorised by gravity")
 
     for index, value in enumerate(sizes):
         plt.text(value, index, str(value))
@@ -65,6 +65,49 @@ def orbits(summary):
     :param summary: A dictionary containing the "small" and "large" entities for each orbited planet.
     :return: Does not return anything
     """
+    labels = [label for label in summary.keys()]
+    small = []
+    large = []
+
+    for key, value in summary.items():
+        if 'large' in value:
+            small.append(len(summary[key]['small']))
+            large.append(len(summary[key]['large']))
+        else:
+            small.append(len(summary[key]['small']))
+            large.append(0)
+
+    fig, axs = plt.subplots(1, len(labels))
+    fig.suptitle('The number and size of entities orbiting each planet: ')
+
+    # Using the number of the planets as a range
+    for i in range(len(labels)):
+        x1 = 2
+        y1 = small[i]
+        x2 = 4
+        y2 = large[i]
+        plt.subplot(int(len(labels)/2), int(len(labels)/3), i + 1)  # At first iteration i will be 0 and creating a subplot 2,3,0 is not valid.
+        plt.bar(x1, y1, color='orange')
+        plt.bar(x2, y2, color='blue')
+        plt.title(labels[i])  # Setting the name of the planet for each subplot
+        plt.legend(['Small', 'Large'])
+
+        # Checking if we have 0 planets orbiting, in order to not display 0
+        if y1 == 0:
+            plt.text(x1, y1, str(y1), color='white', ha='center')  # Setting white so 0 wont be visible
+            plt.text(x2, y2 + 0.5, str(y2), color='black', ha='center')
+        elif y2 == 0:
+            plt.text(x1, y1 / 2, str(y1), color='black', ha='center')
+            plt.text(x2, y2 + 0.5, str(y2), color='white', va='center')  # Setting white so 0 wont be visible
+        else:
+            plt.text(x1, y1 / 2, str(y1), color='black', ha='center')
+            plt.text(x2, y2 + 0.5, str(y2), color='black', ha='center')
+
+    plt.tight_layout()
+    mng = plt.get_current_fig_manager()  # This is the figure manager
+    mng.window.state('zoomed')  # and we use this to open the figure in full screen
+    plt.show()
+
 
 
 def gravity_animation(categories):
