@@ -1,9 +1,25 @@
 # Task 17: Import the modules csv, tui and visual
-import csv, tui, visual, os, sys
+import csv, tui, visual, os, sys, json
+from abc import ABC, abstractmethod
 
 # Task 18: Create an empty list named 'records'.
 # This will be used to store the date read from the source data file.
 records = []
+
+
+class Abstract(ABC):
+
+    @abstractmethod
+    def save(self, option):
+        pass
+
+
+class Save(Abstract):
+
+    def save(self, option):
+        data_arrangement = planet_and_gravity_categories("planets")
+        with open(option + ".json", "w", encoding="utf-8") as f:
+            json.dump(data_arrangement, f, ensure_ascii=False, indent=4)
 
 
 def retrieve_entity(data, entity):
@@ -298,8 +314,6 @@ def run():
                 tui.completed("Data visualisation operation")
 
 
-            # TODO: Your code here
-
             # Task 28: Check if the user selected the option for saving data.  If so, then do the following:
             # - Use the appropriate function in the module tui to indicate that the save data operation has started.
             # - Save the data (see below)
@@ -310,7 +324,15 @@ def run():
             # Writer class that inherits from the AbstractWriter class.  You should then use this to write the records to
             # a JSON file using in the following order: all the planets in alphabetical order followed by non-planets
             # in alphabetical order.
-            # TODO: Your code here
+            elif menu == 4:
+                tui.started("Save data operation")
+                save_menu = tui.save()
+                if save_menu == 1:
+                    data_saving = Save()
+                    data_saving.save(input("Please choose the file name: \n"))
+                else:
+                    print("Invalid selection")
+                tui.completed("Save data operation")
 
             # Task 29: Check if the user selected the option for exiting.  If so, then do the following:
             # break out of the loop

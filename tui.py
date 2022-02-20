@@ -205,7 +205,7 @@ def list_entity(entity, cols=[]):
             for number in cols:
                 print(entity[number])
     except IndexError:
-        print(f"Error!!! \nIndex is out of range. The maximum index you can input is {len(entity-1)}.\n")
+        print(f"Error!!! \nIndex is out of range. The maximum index you can input is {len(entity - 1)}.\n")
 
 
 def list_entities(entities=[], cols=[]):
@@ -336,4 +336,8 @@ def save():
 
     :return: None if an invalid selection is made otherwise an integer corresponding to a valid option
     """
-    # TODO: Your code here
+    print("How would you like to save the data: \n"
+          "1. Export as JSON")
+    json = input()
+
+    return int(json) if json.isnumeric() else False
