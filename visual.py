@@ -120,3 +120,32 @@ def gravity_animation(categories):
     :param categories: A dictionary containing "low", "medium" and "high" gravity entities
     :return: Does not return anything
     """
+
+
+    fig = plt.figure()
+    max_height = max(len(categories["Lower Limits"]),len(categories["Medium Limits"]), len(categories["Upper Limits"]))
+
+    ax = plt.axes(xlim=(-1, 3), ylim=(0, max_height))
+
+    rectangles = plt.bar(["Lower Limits \n" + str(len(categories["Lower Limits"])),"Medium Limits \n" + str(len(categories["Medium Limits"])),"Upper Limits \n" + str(len(categories["Upper Limits"]))],[len(categories["Lower Limits"]),len(categories["Medium Limits"]), len(categories["Upper Limits"])],width=0.1) #rectangles to animate
+
+    patches = list(rectangles) #things to animate
+
+    def init():
+        #init rectangles
+        for rectangle in rectangles:
+            rectangle.set_height(0)
+
+        return patches #return everything that must be updated
+
+    def animate(i):
+        #animate rectangles
+        for j,rectangle in enumerate(rectangles):
+            rectangle.set_height(i/(j+1))
+
+        return patches #return everything that must be updated
+
+    anim = animation.FuncAnimation(fig, animate, init_func=init,
+                                   frames=max_height, interval=10, blit=True)
+
+    plt.show()

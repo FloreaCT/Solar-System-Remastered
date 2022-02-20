@@ -289,6 +289,10 @@ def run():
                     visual.orbits(planet_and_gravity_categories(planet_and_gravity_categories("planets")["Planets"]))
                     tui.completed("Orbit summary visualisation process")
 
+                if visualise_menu == 4:
+                    tui.started("Gravity animation visualisation process")
+                    visual.gravity_animation(planet_and_gravity_categories("gravity"))
+                    tui.completed("Gravity animation visualisation process")
                 if visualise_menu == 5:
                     menu
                 tui.completed("Data visualisation operation")
