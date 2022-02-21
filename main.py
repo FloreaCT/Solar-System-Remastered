@@ -42,7 +42,6 @@ def file_path():
                 csvdata = csv.reader(csvFile, delimiter=',')
                 for row in csvdata:
                     records.append(row)
-                csvFile.close()
         else:
             print("Invalid file path or file is missing.")
 
@@ -112,7 +111,7 @@ def planet_and_gravity_categories(option):
 
 
 def run():
-    # try:
+    try:
         # Task 19: Call the function welcome of the module tui.
         # This will display our welcome message when the program is executed.
         tui.welcome()
@@ -140,7 +139,6 @@ def run():
                 tui.started("Data loading")
                 file_path()
                 tui.completed("Data loading")
-
             # Task 22: Check if the user selected the option for processing data.  If so, then do the following:
             # - Use the appropriate function in the module tui to display a message to indicate that the data processing
             # operation has started.
@@ -217,11 +215,22 @@ def run():
                         tui.list_entity(retrieve_entity(records, tui.entity_name()))
                         tui.completed("Entity retrieval process")
 
+                    # elif process_menu == 2:
+                    #     tui.started("Entity details retrieval")
+                    #     entity = tui.entity_details()
+                    #     tui.list_entity(retrieve_entity(records, entity[0]), entity[1])
+                    #     tui.completed("Entity details retrieval")
                     elif process_menu == 2:
-                        tui.started("Entity details retrieval")
-                        entity = tui.entity_details()
-                        tui.list_entity(retrieve_entity(records, entity[0]), entity[1])
-                        tui.completed("Entity details retrieval")
+                        entities = [planet.capitalize() for planet in input("Please enter one or more entities. ex: Earth,Moon,Saturn \n").split(",")]
+                        indexes = [int(index) for index in input("Please enter the indexes you would like to see. ex: 1,2,3\n").split(',') if index.isnumeric()]
+                        planets = []
+                        for entity in entities:
+                            planet = retrieve_entity(records, entity)
+                            if not planet:
+                                continue
+                            else:
+                                planets.append(planet)
+                        tui.list_entities(planets, indexes)
 
                     elif process_menu == 3:
                         tui.started("Entity type categorisation process")
@@ -341,10 +350,10 @@ def run():
 
             # Task 30: If the user selected an invalid option then use the appropriate function of the module tui to
             # display an error message
-    # except ValueError:
-    #     error = str(sys.exc_info()[1]).split()
-    #     tui.error(error[-1])
-    #     run()
+    except ValueError:
+        error = str(sys.exc_info()[1]).split()
+        tui.error(error[-1])
+        run()
 
 
 if __name__ == "__main__":

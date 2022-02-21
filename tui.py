@@ -1,6 +1,3 @@
-import main
-
-
 def welcome():
     """
     Task 1: Display a welcome message.
@@ -40,6 +37,7 @@ def menu():
                       "3. Visualise Data \n"
                       "4. Save Data \n"
                       "5. Exit \n")
+
     if main_menu in menu_number:
         return int(main_menu)
     else:
@@ -103,14 +101,14 @@ def source_data_path():
 
     :return: None if the file path does not end in 'csv' otherwise return the file path entered by the user
     """
-    # TODO: Remove the # and the return statement
-    # file_path = input("Please enter the file path: \n")
-    # if file_path[-4:].lower() != ".csv":
-    #     error(file_path)
-    #     return None
-    # else:
-    #     return file_path.lower()
-    return "data/sol_data.csv"
+
+    file_path = input("Please enter the file path: \n")
+
+    if file_path[-4:].lower() != ".csv":  # Checking if the last 4 characters from the user input are .csv
+        error(file_path)
+        return None
+    else:
+        return file_path.lower()
 
 
 def process_type():
@@ -137,6 +135,7 @@ def process_type():
                          "4. Categorise entities by gravity \n"
                          "5. Summarise entities by orbit \n"
                          "6. Back \n")
+
     if process_menu in process_numbers:
         return int(process_menu)
 
@@ -173,7 +172,7 @@ def entity_details():
     entity = entity_name()
     column_indexes = input("Please enter a list of integers for the column indexes (Ex: 0,1,3,6): \n")
 
-    if len(column_indexes) == 0:
+    if not column_indexes:  # Checking if the user left the input empty
         return [entity, []]
     else:
         indexes = [int(index) for index in column_indexes.split(",") if index.isnumeric()]
@@ -197,6 +196,7 @@ def list_entity(entity, cols=[]):
     :param cols: A list of integer values that represent column indexes
     :return: does not return anything
     """
+
     try:
         if not cols:
             for detail in entity:
@@ -204,6 +204,7 @@ def list_entity(entity, cols=[]):
         else:
             for number in cols:
                 print(entity[number])
+
     except IndexError:
         print(f"Error!!! \nIndex is out of range. The maximum index you can input is {len(entity - 1)}.\n")
 
@@ -229,15 +230,16 @@ def list_entities(entities=[], cols=[]):
     :param cols: A list of integer values that represent column indexes
     :return: Does not return anything
     """
+
     if not cols:
         for entity in entities:
-            list_entity(entity.capitalize(), [])
             print("-" * len(entity[0]) * 2)
+            list_entity(entity, [])
     else:
         for entity in entities:
-            print('{0:>{1}}'.format(entity.capitalize(), len(entity[0]) + 1 + (len(entity) / 1.5)))
-            list_entity(entity.capitalize(), cols)
             print("-" * len(entity[0]) * 2)
+            list_entity(entity, cols)
+
 
 
 def list_categories(categories):
@@ -290,9 +292,9 @@ def orbits():
 
     :return: a list of entity names
     """
-    plenets_on_orbit = input("Please enter the name of the planets: ").capitalize().split(",")
+    planets_on_orbit = input("Please enter the name of the planets: ").split(",")
 
-    return [planet.capitalize() for planet in plenets_on_orbit]
+    return [planet.capitalize() for planet in planets_on_orbit]
 
 
 def visualise():
