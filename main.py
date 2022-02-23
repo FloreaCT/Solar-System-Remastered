@@ -64,6 +64,21 @@ def file_path():
             print("Invalid file path or file is missing.")
 
 
+def entity():
+    entities = [planet.capitalize() for planet in
+                input("Please enter one or more entities. ex: Earth,Moon,Saturn \n").split(",")]
+    indexes = [int(index) for index in input("Please enter the indexes you would like to see. ex: 1,2,3\n").split(',')
+               if index.isnumeric()]
+    planets = []
+    for entity in entities:
+        planet = retrieve_entity(records, entity)
+        if not planet:
+            continue
+        else:
+            planets.append(planet)
+
+    return planets, indexes
+
 def planet_and_gravity_categories(option):
     """
     A multi function that does 3 things based on the option parameter.
@@ -128,7 +143,7 @@ def planet_and_gravity_categories(option):
                         if planet == orbiting[21]:  # Looking for the requested orbited planet
                             if orbiting[21] != "NA":  # Excluding non orbited planets
                                 if float(orbiting[10]) < 100:
-                                    small.append(orbiting[0]) 
+                                    small.append(orbiting[0])
                                 else:
                                     large.append(orbiting[0])
 
@@ -257,16 +272,8 @@ def run():
 
                     elif process_menu == 2:
                         tui.started("Entity details retrieval")
-                        entities = [planet.capitalize() for planet in input("Please enter one or more entities. ex: Earth,Moon,Saturn \n").split(",")]
-                        indexes = [int(index) for index in input("Please enter the indexes you would like to see. ex: 1,2,3\n").split(',') if index.isnumeric()]
-                        planets = []
-                        for entity in entities:
-                            planet = retrieve_entity(records, entity)
-                            if not planet:
-                                continue
-                            else:
-                                planets.append(planet)
-                        tui.list_entities(planets, indexes)
+                        entity_det = entity()
+                        tui.list_entities(entity_det[0], entity_det[1])
                         tui.completed("Entity details retrieval")
 
                     elif process_menu == 3:
