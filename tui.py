@@ -241,7 +241,6 @@ def list_entities(entities=[], cols=[]):
             list_entity(entity, cols)
 
 
-
 def list_categories(categories):
     """
     Task 12: Display the contents of the dictionary categories.
@@ -294,6 +293,7 @@ def orbits():
     """
     planets_on_orbit = input("Please enter the name of the planets: ").split(",")
 
+    # Using a list comprehension to returning a list of planets that are capitalized
     return [planet.capitalize() for planet in planets_on_orbit]
 
 

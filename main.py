@@ -8,14 +8,18 @@ records = []
 
 
 class Abstract(ABC):
-
+    """
+    A abstract class just to demonstrate the concept of OOP.
+    """
     @abstractmethod
     def save(self, option):
         pass
 
 
 class Save(Abstract):
-
+    """
+    A class that inherits from Abstract class.
+    """
     def save(self, option):
         data_arrangement = planet_and_gravity_categories("planets")
         with open(option + ".json", "w", encoding="utf-8") as f:
@@ -23,9 +27,17 @@ class Save(Abstract):
 
 
 def retrieve_entity(data, entity):
+    """
+    A function that takes a dictionary and searches the planet within that dictionary.
+
+    :param data: A dictionary containing a data of all entities.
+    :param entity: An entity to be searched within the dictionary.
+    :return: If an entity is found, return a list with all the data about that entity.
+    """
+
     entity_found = False
     for planet in data:
-        if entity == planet[0]:
+        if entity == planet[0]:  # Checking if the entity is matching the entity name in the dictionary
             return planet
         else:
             continue
@@ -35,6 +47,12 @@ def retrieve_entity(data, entity):
 
 
 def file_path():
+    """
+    A function that checks for a .csv file within a file path. If the file exists, all the data from the file will be
+    appended to the variable records. Otherwise an error will be printed
+
+    :return: Does not return anything
+    """
     path = tui.source_data_path()
     if path:
         if os.path.exists(path):
@@ -47,27 +65,43 @@ def file_path():
 
 
 def planet_and_gravity_categories(option):
+    """
+    A multi function that does 3 things based on the option parameter.
+
+    1. If the parameter "planets" is given, the function will create a dictionary which will consist of 2 key value pairs.
+    One for Planets and a list of planets and one for Non Planets and a list of Non Planets
+
+    2. If the parameter "gravity" is given, the function will create a dictionary which will consist of 3 key value pairs.
+
+    3. If any other parameter is given, the function will create a dictionary which will consist of 3 key value pairs.
+
+    :param option: A string
+    :return: Returns a dictionary based on the option selected
+    """
+
     if option == "planets":
         planet_dictionary = {"Planets": [], "Non_planets": []}
-        for entity in records[1:]:
+        for entity in records[1:]:  # Checking if the entity is a planet or not
             if entity[1] == "FALSE":
                 planet_dictionary["Non_planets"].append(entity[0])
             else:
                 planet_dictionary["Planets"].append(entity[0])
+
         planet_dictionary["Planets"] = sorted(planet_dictionary["Planets"], key=lambda x: x[0])
         planet_dictionary["Non_planets"] = sorted(planet_dictionary["Non_planets"], key=lambda x: x[0])
+
         return planet_dictionary
 
     elif option == "gravity":
-        gravities = tui.gravity_range()
+        gravities = tui.gravity_range()  # A variable consisting of lower and upper limits
         planet_gravities = {"Lower Limits": [],
                             "Medium Limits": [],
                             "Upper Limits": []}
 
         for gravity in records[1:]:
-            if float(gravity[8]) < gravities[0]:
+            if float(gravity[8]) < gravities[0]:  # Checking if the entity's gravity is lower then the lower limit
                 planet_gravities["Lower Limits"].append(gravity[0])
-            elif gravities[0] < float(gravity[8]) < gravities[1]:
+            elif gravities[0] < float(gravity[8]) < gravities[1]:  # Checking if the entity's gravity is between the limits
                 planet_gravities["Medium Limits"].append(gravity[0])
             else:
                 planet_gravities["Upper Limits"].append(gravity[0])
@@ -79,7 +113,7 @@ def planet_and_gravity_categories(option):
         orbits = {}
 
         for entity in set(option):
-            if not entity in [y for x in records for y in x]:
+            if not entity in [y for x in records for y in x]:  # Using a list comprehension to check if the entity is in records dictionary
                 option.remove(entity)
                 print(f"\nCould not find {entity}.\n")
 
@@ -91,10 +125,10 @@ def planet_and_gravity_categories(option):
                     small = []
                     large = []
                     for orbiting in records[1:]:
-                        if planet == orbiting[21]:
-                            if orbiting[21] != "NA":
+                        if planet == orbiting[21]:  # Looking for the requested orbited planet
+                            if orbiting[21] != "NA":  # Excluding non orbited planets
                                 if float(orbiting[10]) < 100:
-                                    small.append(orbiting[0])
+                                    small.append(orbiting[0]) 
                                 else:
                                     large.append(orbiting[0])
 
@@ -220,7 +254,9 @@ def run():
                     #     entity = tui.entity_details()
                     #     tui.list_entity(retrieve_entity(records, entity[0]), entity[1])
                     #     tui.completed("Entity details retrieval")
+
                     elif process_menu == 2:
+                        tui.started("Entity details retrieval")
                         entities = [planet.capitalize() for planet in input("Please enter one or more entities. ex: Earth,Moon,Saturn \n").split(",")]
                         indexes = [int(index) for index in input("Please enter the indexes you would like to see. ex: 1,2,3\n").split(',') if index.isnumeric()]
                         planets = []
@@ -231,6 +267,7 @@ def run():
                             else:
                                 planets.append(planet)
                         tui.list_entities(planets, indexes)
+                        tui.completed("Entity details retrieval")
 
                     elif process_menu == 3:
                         tui.started("Entity type categorisation process")
